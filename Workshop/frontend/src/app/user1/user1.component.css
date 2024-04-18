@@ -1,0 +1,6 @@
+hr{
+    border: 10px solid black;
+    border-radius: 5px;
+}
+
+tr:nth-child(odd) {background-color: #f2f2f2;}

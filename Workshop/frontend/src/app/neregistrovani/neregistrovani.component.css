@@ -1,0 +1,12 @@
+  tr:nth-child(even) {background-color: #f2f2f2;}
+  table.rad, td.rad {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+
+  .pretraga tr{
+    background-color: white; 
+    color: black;
+    font-weight: bold;
+   
+  }

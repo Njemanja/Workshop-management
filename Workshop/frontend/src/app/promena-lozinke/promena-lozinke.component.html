@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Promena lozinke</title>
+</head>
+<body style="text-align: center;">
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 20px;">
+          <div class="container">
+           
+
+            <div class="row">
+                <div class="col-lg-12">
+                  <h1 style="text-align: center; color: white;">Promena lozinke</h1>
+        
+                </div>
+              </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ml-auto" style="float: right;">
+                <li class="nav-item">
+                  <a class="nav-link" href="{{url}}">Nazad</a>
+                </li>
+              
+                <li class="nav-item">
+                  <a class="nav-link" href="">Logout</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <table align="center" cellpadding="10px">
+                    <tr>
+                        <td>Stara lozinka:</td>
+                        <td><input  type="password" [(ngModel)]="staraLozinka"></td>
+                    </tr>
+                    <tr>
+                        <td>Nova lozinka:</td>
+                        <td><input  type="password" [(ngModel)]="lozinka"></td>
+                    </tr>
+                    <tr>
+                        <td>Nova lozinka (opet):</td>
+                        <td><input type="password" [(ngModel)]="lozinka1" ></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><button (click)="azurirajLozinku()">Potvrdi</button></td>
+                      
+                    </tr>
+                   
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white p-4 fixed-bottom" style="padding-top: 20px;">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <p class="text-center" >Elektrotehnicki fakultet, Univerzitet u Beogradu 2023.</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+    <!--<h1>Promena lozinke</h1>
+    <hr/>
+    <table align="center">
+        <tr>
+            <td >Korisnicko ime:</td>
+            <td><input type="text" [(ngModel)]="korisnickoIme" style="border-radius: 25px;"></td>
+        </tr>
+        <tr>
+            <td >Stara lozinka: </td>
+            <td><input type="text" [(ngModel)]="staraLozinka" style="border-radius: 25px;"></td>
+        </tr>
+        <tr>
+            <td>Nova lozinka:</td>
+            <td><input type="text" [(ngModel)]="novaLozinka" style="border-radius: 25px;"></td>
+        </tr>
+        <tr>
+            <td>Nova lozinka (ponovo):</td>
+            <td><input type="text" [(ngModel)]="novaLozinka1" style="border-radius: 25px;"></td>
+        </tr>
+        <tr>
+            <td colspan="2"> <button (click)="promeniLozinku()">Potvrdi</button></td>
+        </tr>
+    </table>-->
+</body>
+</html>

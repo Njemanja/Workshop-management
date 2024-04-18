@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Azuriranje podataka</title>
+</head>
+<body >
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 20px;">
+          <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div  style="text-align:center;font-size: 30px; color: white;margin-bottom: 10px;">
+                        Azuriranje podataka
+                    </div>
+                </div>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="user/profil">Nazad</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="">Logout</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+    </header>
+    <div class="container">
+        
+        <div class="row">
+            <table align="center" style="padding-top: 50px;">
+                <tr style="text-align: center;">
+                    <td colspan="4">Novo ime</td>
+                </tr>
+                <tr>
+                    
+                    <td ><input [(ngModel)]="ime"></td>
+                    <td>
+                        <button (click)="azurirajIme()">Potvrdi</button>
+                    </td>
+                </tr>
+                <tr style="text-align: center;">
+                    <td colspan="4">Novo prezime</td>
+                </tr>
+                <tr>
+                    <td><input [(ngModel)]="prezime"> </td>
+                    <td>
+                        <button (click)="azurirajPrezime()">Potvrdi</button>
+                    </td>
+                </tr>
+                <tr style="text-align: center;">
+                    <td colspan="4">Novo  korisnicko ime</td>
+                </tr>
+                <tr>
+                    <td><input [(ngModel)]="korisnickoIme"></td>
+                    <td>
+                        <button (click)="azurirajKorisnickoIme()">Potvrdi</button>
+                    </td>
+                </tr>
+                <tr style="text-align: center;">
+                    <td colspan="4">Novi broj telefona</td>
+                </tr>
+                <tr>
+                    <td ><input [(ngModel)]="telefon"></td>
+                    <td>
+                        <button (click)="azurirajTelefon()">Potvrdi</button>
+                    </td>
+                </tr>
+                <tr style="text-align: center;">
+                    <td colspan="4">Nova email adresa</td>
+                </tr>
+                <tr>
+                    <td ><input [(ngModel)]="email"></td>
+                    <td>
+                        <button (click)="azurirajEmail()">Potvrdi</button>
+                    </td>
+                </tr>
+                <tr style="text-align: center;">
+                    <td colspan="4">Nova slika</td>
+                </tr>
+                <tr>
+                    <td><input type="file" [(ngModel)]="slika" (change)="ucitajSliku($event)"></td>
+                    <td><button (click)="obrisiSliku()">Obrisi sliku</button></td>
+                    <td>
+                        <button (click)="azurirajSliku()">Potvrdi</button>
+                    </td>
+                </tr>
+                
+                <tr>
+                    
+                </tr>
+            </table>
+        </div>
+        <div class="row" style="margin-top: 10px;">
+            <table align="center" style="padding-top: 50px;">
+                <tr style="text-align: center;">
+                    <td colspan="4" >Nova lozinka</td>
+                </tr>
+                <tr>
+                    <td >Stra lozinka: <input type="password" [(ngModel)]="staraLozinka"></td>
+                    <td >Nova lozinka: <input type="password" [(ngModel)]="lozinka"></td>
+                    <td >Nova lozinka (opet): <input type="password" [(ngModel)]="lozinka1"></td>
+                    <td class="btn">
+                        <button (click)="azurirajLozinku()" >Potvrdi</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+
+
+    <footer class="bg-dark text-white p-4 fixed-bottom" style="padding-top: 20px;">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <p class="text-center" >Elektrotehnicki fakultet, Univerzitet u Beogradu 2023.</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+</body>
+</html>

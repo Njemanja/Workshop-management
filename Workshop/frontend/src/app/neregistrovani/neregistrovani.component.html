@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Neregistrovani korisnik</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 20px;">
+          <div class="container">
+           <div style="color: white; font-size: 35px;">
+            Pregled radionica
+           </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="">Login</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+    </header>
+    <div class="container" style="width: 100%;">
+       
+       
+        <div class="row" style="width: 100%; ">
+            <div class="col-lg-12" style="text-align: center;font-size: 40px; background-color: black; color: white; font-weight: bolder; margin-bottom: 5px; ">
+                Radionice
+            </div>
+            <div *ngFor="let r of radionice" class="col-lg-6 col-sm-12 radionica" style="margin-top: 50px;">
+                <table align="center" class="rad"  cellspacing="0" cellpadding="10px" style="width: 500px;" *ngIf="r.status==1">
+                    <tr>
+                       <td  class="rad" style="text-align: center"> {{r.naziv}}</td>
+                    </tr>
+                    <tr>
+                        <td class="rad"><b>Datum:</b> {{r.datum | date:"dd.MM.yyyy. HH:mm"}}</td>
+                    </tr>
+                    <tr>
+                        <td class="rad"><b>Mesto:</b>{{r.mesto}}</td>
+                    </tr>
+                    <tr>
+                        <td class="rad"><b>Opis:</b> {{r.opis}}</td>
+                    </tr>
+                    <tr >
+                        <td align="center">
+                            <img [src]="r.slika" style="height: 500px; width: 500px;">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <hr/>
+        <div class="row" style="width: 100%;">
+            <div class="col-lg-12" style="text-align: center;font-size: 40px; background-color: black; color: white; font-weight: bolder; margin-bottom: 10px; ">
+                Pretraga
+            </div>
+           <div class="col-sm-12">
+           
+            <table align="center"  cellspacing="10"  cellpadding="10px" class="pretraga">
+                
+                <tr>
+                    <td>Pretrezi po nazivu: </td>
+                    <input  [(ngModel)]="naziv">
+                    <td >Pretrezi po mestu: </td>
+                    <input [(ngModel)]="mesto">
+                </tr>
+                <tr align="center" >
+                    <td colspan="4">
+                        <button (click)="pretrazi()">Pretrazi</button>
+                    </td>
+                </tr>
+                <tr >
+                    <td *ngIf="dat" colspan="2">
+                        <button (click)="sortirajDatum()">Sortiraj po datumu</button>
+                    </td>
+                    <td *ngIf="naz" colspan="2" align="right">
+                        <button (click)="sortirajNaziv()">Sortiraj po nazivu</button>
+                    </td>
+                </tr>
+               
+            </table>
+           </div>
+        </div>
+        <hr/>
+        <!--<h2 style="text-align: center;">Top pet radionica</h2>
+        <table align="center" *ngFor="let r of top5"  cellspacing="10">
+            <tr align="center" >
+                <td colspan="4">
+                    {{r.slika}}
+                </td>
+            </tr>
+            <tr>
+                <th>Naziv</th>
+                <th>Datum radionice</th>
+                <th>Mesto odrzavanja</th>
+                <th>Opis</th>
+                <th>Broj lajkova</th>
+            </tr>
+            <tr>
+                <td>{{r.naziv}}</td>
+                <td>{{r.datum}}</td>
+                <td>{{r.mesto}}</td>
+                <td>{{r.opis}}</td>
+                <td>{{r.brojLajkova}}</td>
+            </tr>
+           
+        </table>-->
+        <div class="row" style="width: 100%; ">
+            <div class="col-lg-12" style="text-align: center;font-size: 40px; background-color: black; color: white; font-weight: bolder; margin-bottom: 10px; ">
+                Top 5
+            </div>
+            <div *ngFor="let r of top5" class="col-lg-6 col-sm-12 " style="margin-top: 50px;">
+                <table align="center" class="rad"  cellspacing="0" cellpadding="10px" style="width: 500px;">
+                    <tr>
+                       <td  class="rad" style="text-align: center"> {{r.naziv}}</td>
+                    </tr>
+                    <tr>
+                        <td class="rad"><b>Datum:</b> {{r.datum | date:"dd.MM.yyyy. HH:mm"}}</td>
+                    </tr>
+                    <tr>
+                        <td class="rad"><b>Mesto:</b>{{r.mesto}}</td>
+                    </tr>
+                    <tr>
+                        <td class="rad"><b>Opis:</b> {{r.opis}}</td>
+                    </tr>
+                    <tr>
+                        <td class="rad"><b>Broj lajkova:</b> {{r.brojLajkova}}</td>
+                    </tr>
+                    <tr >
+                        <td align="center">
+                            <img [src]="r.slika" style="height: 500px; width: 500px;">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <footer class="bg-dark text-white p-4" style="padding-top: 20px;">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <p class="text-center" >Elektrotehnicki fakultet, Univerzitet u Beogradu 2023.</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+    
+
+    
+</body>
+</html>
+
+<script language="JavaScript"> 
+    $('div').empty().remove();
+</script>

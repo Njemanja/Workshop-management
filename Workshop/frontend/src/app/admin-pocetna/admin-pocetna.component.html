@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 20px;">
+          <div class="container">
+            <div class="container" style="text-align: center;">
+                <p style="color: white; font-size: 30px;">Admin({{korisnickoIme}})</p>
+              </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <!--<a class="nav-link" href="#">Nazad</a>-->
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="adminPocetna/lozinka">Lozinka</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/admin">Logout</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+    </header>
+    <div class="container">
+    
+        <div class="row" >
+            <div class="col-lg-12">
+                <div style="width: 100%;font-size: 30px; background-color: black; color: white; text-align: center;">
+                    Svi korisnici
+                 </div>
+                <div>
+                    <table  width="100%" cellspacing="10px" cellpadding="10px" style="border: 2px solid black;">
+                        <tr>
+                    <th>Ime</th>
+                    <th>Prezime</th>
+                    <th>Korisnicko ime</th>
+                    <th>Telefon</th>
+                    <th>Email</th>
+
+                    <th>Tip</th>
+                    <th>Status</th>
+                </tr>
+                <tr *ngFor="let k of korisnici" style="border: solid black 1px;" [ngClass]="k.status=='cekanje'? 'naCekanju': ''">
+                    <td >{{k.ime}}</td>
+                    <td>{{k.prezime}}</td>
+                    <td >{{k.korisnickoIme}}</td>
+                    <td >{{k.telefon}}</td>
+                    <td >{{k.email}}</td>
+
+                    <td >{{k.tip}}</td>
+                    <td>{{k.status}}</td>
+                    <!--<td><button (click)="obrisiKorisnika(k.korisnickoIme)">Obrisi</button></td>-->
+                </tr>
+                        </table>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-lg-12">
+                <div style="margin-top:20px;width: 100%;font-size: 30px; background-color: black; color: white; text-align: center;">
+                    Dodaj korisnika ili organizatora
+                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div>
+                    <table style="width: 100%;background-color: lightgray;">
+                        <tr>
+                            <td align="center">   
+                                <a style="color: black;font-size: 20px; font-weight: bolder;" href="register1">Dodaj organizatora</a>
+                                &nbsp; &nbsp;
+                                <a style="color: black;font-size: 20px; font-weight: bolder;" href="register" >Dodaj korisnika</a></td>
+                            
+                        </tr>
+                       
+                    </table>
+                </div>
+              
+              
+            </div>
+        </div>
+        <div class="row" style="margin-top: 20px;">
+            <div style="margin-top: 20px;width: 100%;font-size: 30px; background-color: black; color: white; text-align: center;">
+              Azuriraj korisnika
+             </div>
+        </div>
+        <div class="row">
+            <table align="center" style="margin-top: 20px; background-color: lightgray;" cellpadding="10">
+                <tr>
+                    <td>Nova vrednost za polje: <input [(ngModel)]="novaVrednost"></td>
+                </tr>
+                <tr>
+                    <td>Korisnicko ime korisnika: <input  [(ngModel)]="korisnickoImeMenjanje"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center"><select  [(ngModel)]="parametar">
+                        <option value="ime">Ime</option>
+                        <option value="prezime">Prezime</option>
+                        <option value="korisnickoIme">Korisnicko ime</option>
+                        <option value="telefon">Telefon</option>
+                        <option value="email">Email</option>
+                        <option value="nazivOrganizacije">Naziv organizacije</option>
+                        <option value="drzava">Drzava</option>
+                        <option value="grad">Grad</option>
+                        <option value="postanskiBroj">Postanski broj</option>
+                        <option value="ulica">Ulica</option>
+                        <option value="broj">Broj</option>
+                        <option value="status">Status</option>
+                        <option value="slika">Slika</option>
+                    </select></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center"><input type="file" [(ngModel)]="slika1" (change)="ucitajSliku($event)"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center"><button (click)="azuriraj()">Potvrdi</button></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center" style="color: red;">{{poruka}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="row" style="margin-top: 20px;">
+            <div style="margin-top: 20px;width: 100%;font-size: 30px; background-color: black; color: white; text-align: center;">
+              Sve radionice
+             </div>
+        </div>
+        <div class="row"> 
+            <div class="col-lg-12 col-sm-12" style="background-color: lightgray;">
+                <table *ngFor="let r of sveRadionice" width="100%"  cellpadding="10" cellspacing="0" style="background-color: white;text-align: center; border: 2px solid black; margin-bottom: 50px;">
+                    <tr  [ngClass]="{'': r.status == 1, 'klasa0': r.status == 0}" style="background-color: black; color:white"> 
+                        <th>ID</th>
+                        <th>Naziv</th>
+                        <th>Datum</th>
+                        <th>Mesto</th>
+                        <th>Opis</th>
+                        <th>Duzi opis</th>
+                        <th>Broj lajkova</th>
+                        <th>Status</th>
+                        <th>Organizator</th>
+                        <th>Obrisi</th>
+                        <th>Prihvati</th>
+                    </tr>
+                    <tr  [ngClass]="{'': r.status == 1, 'klasa0': r.status == 0}" style="border-bottom: solid black;" >
+                        
+                        <td >{{r.id}}</td>
+                        <td>{{r.naziv}}</td>
+                        <td>{{r.datum | date:"dd.MM.yyyy. HH:mm"}}</td>
+                        <td>{{r.mesto}}</td>
+                        <td>{{r.opis}}</td>
+                        <td>{{r.duziOpis}}</td>
+                       
+                        <td>{{r.brojLajkova}}</td>
+                        <!--<td>{{r.galerija}}</td>-->
+                        <td>{{r.status}}</td>
+                        <td>{{r.organizator}}</td>
+                        <td><button (click)="obrisiRadionicu(r.id)">Obrisi</button></td>
+                        <td><button (click)="prihvatiRadionicu(r.id, r.organizator)" *ngIf="r.status==0">Prihvati radionicu</button></td>
+                    </tr>
+                    <tr style="text-align: center;">
+                        <td colspan="11"  style="text-align: center;">
+                           <b>Slika</b>
+                        </td>
+                    </tr>
+                    <tr style="text-align: center;">
+                        <td colspan="11"  style="text-align: center;">
+                            <img [src]="r.slika" alt="" style="max-width:500px;
+                            max-height: 500px;
+                            overflow-y: auto;">
+                        </td>
+                    </tr>
+                    <tr style="text-align: center;" *ngIf="r.galerija.length>0">
+                        <td colspan="11"  style="text-align: center;">
+                           <b>Galerija</b>
+                        </td>
+                    </tr>
+                    <tr style="text-align: center;" *ngFor="let g of r.galerija" >
+                        <td colspan="11"   style="max-width:50px; max-height: 50px;overflow-y: auto;">
+                            <img [src]="g">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-lg-12 col-sm-12">
+                <div width="100%" class="active" style="background-color: black; color:white; text-align: center;"><h2>Nova radionica</h2></div>
+
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-sm-12">
+                <table align="center" style="margin-top: 20px;background-color: lightgray;" >
+                    <tr style=" padding-bottom: 1em;">
+                        <td style="padding: 10;">Naziv radionice: </td>
+                        <td colspan="2"><input  [(ngModel)]="naziv"></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+            
+                    <tr>
+                        <td>Mesto odrzavanja radionice: </td>
+                        <td colspan="2"><input  [(ngModel)]="mesto"></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+            
+                    <tr>
+                        <td>Datum odrzavanja radionice: </td>
+                        <td colspan="2"><input type="datetime-local"  [(ngModel)]="datum"></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+            
+                    <tr>
+                        <td>Kratak opis radionice: </td>
+                        <td colspan="2"><input  [(ngModel)]="opis"></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+            
+                    <tr>
+                        <td>Duzi opis: </td>
+                        <td colspan="2">
+                            <textarea  [(ngModel)]="duziOpis"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+            
+                    <tr>
+                        <td>Broj mesta: </td>
+                        <td colspan="2">
+                            <input  type="number" [(ngModel)]="slobodnaMesta">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+            
+                    <tr>
+                        <td>Slika:</td>
+                        <td><input type="file" [(ngModel)]="slika" (change)="ucitajSliku1($event)"></td>
+                        <td><button (click)="obrisiSliku()">Obrisi sliku</button></td>
+                    </tr>
+                    <tr >
+                        <td *ngIf="slika" colspan="2" align="center"><img [src]="slika" style="height: 300px; width: 300px"></td>
+                    </tr>
+            
+                    <tr>
+                        <td>Galerija:</td>
+                        <td><input type="file" [(ngModel)]="galerija" (change)="ucitajGaleriju($event)" multiple></td>
+                        <td><button (click)="obrisiGaleriju()">Obrisi slike</button></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+            
+                
+            
+                    <tr >
+                        <td colspan="3" style="text-align: center;"><button (click)="potvrdi()">Potvrdi</button></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+            
+                    <tr>
+                        <td colspan="3" style="color: red;text-align: center;"><b>{{poruka1}}</b></td>
+                    </tr>
+                    
+                </table>
+                <table align="center" class="dodaj" style="background-color: lightgray;">
+                    <tr *ngFor="let g of galerija" style="text-align: center; background-color: white;">
+                        <td align="center"><img [src]="g" height="200px" width="400px" style="align-self: center;"></td>
+                        <td colspan="2"><button (click)="obrisiSlikuIzGalerije(g)">Obrisi</button></td>
+                    </tr>
+                </table>
+            </div>
+         </div>
+         <div class="row" style="margin-top: 20px;">
+            <div class="col-lg-12 col-sm-12">
+                <div width="100%" class="active" style="background-color: black; color:white; text-align: center;"><h2>Azuriraj radionicu</h2></div>
+
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-sm-12">
+                <table align="center" style="margin-top: 20px;background-color: lightgray;" cellpadding="10px">
+                    <tr style=" padding-bottom: 1em;">
+                        <td style="padding: 10;">ID radionice: </td>
+                        <td colspan="2"><input  [(ngModel)]="IDRadioniceAzuriranje"></td>
+                    </tr>
+                    <tr style=" padding-bottom: 1em;">
+                        <td style="padding: 10;">Novi paramter: </td>
+                        <td colspan="2"><input  [(ngModel)]="parametarRadionice"></td>
+                    </tr>
+                    <tr>
+                        <td>Slika:</td>
+                        <td><input type="file" [(ngModel)]="slikaAzuriranje" (change)="ucitajSliku2($event)"></td>
+                        <td><button (click)="obrisiSliku2()">Obrisi sliku</button></td>
+                    </tr>
+                    <tr>
+                        <td>Galerija:</td>
+                        <td><input type="file" [(ngModel)]="galerija2" (change)="ucitajGaleriju2($event)" multiple></td>
+                        <td><button (click)="obrisiGaleriju2()">Obrisi slike</button></td>
+                    </tr>
+                    <tr>
+                        <td>Datum odrzavanja radionice: </td>
+                        <td colspan="2"><input type="datetime-local"  [(ngModel)]="datum"></td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="3" align="center"><select  [(ngModel)]="parametar1">
+                            <option value="naziv">Naziv</option>
+                            <option value="datum">Datum</option>
+                            <option value="mesto">Mesto</option>
+                            <option value="opis">Opis</option>
+                            <option value="duziOpis">Duzi opis</option>
+                            <option value="slika">Slika</option>
+                            <option value="galerija">Galerija</option>
+                        </select></td>
+                    </tr>
+
+                    <tr >
+                        <td colspan="3" style="text-align: center;"><button (click)="azurirajRadionicu()">Azuriraj</button></td>
+                    </tr>
+                    
+                </table>
+                <table align="center" class="dodaj" style="margin-bottom:20px;background-color: lightgray;">
+                    <tr *ngFor="let g of galerija2" style="text-align: center; background-color: white;">
+                        <td align="center"><img [src]="g" height="200px" width="400px" style="align-self: center;"></td>
+                    </tr>
+                </table>
+            </div>
+         </div>
+    </div>
+    <footer class="bg-dark text-white p-4" style="padding-top: 20px;">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <p class="text-center" >Elektrotehnicki fakultet, Univerzitet u Beogradu 2023.</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Prijavi radionicu</title>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 20px;">
+          <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div style="font-size: 40px; color: white; font-weight: bolder;text-align: center; ">
+                        Prijavi radionicu
+                    </div>
+                </div>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="user">Nazad</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="">Logout</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+    </header>
+   
+    <div class="container">
+        <div class="row">
+           <div class="col-lg-12 col-sm-12">
+            <table align="center" style="margin-top: 20px;">
+                <tr>
+                    <td>Naziv radionice: </td>
+                    <td colspan="2"><input  [(ngModel)]="naziv"></td>
+                </tr>
+                <tr>
+                    <td>Mesto odrzavanja radionice: </td>
+                    <td colspan="2"><input  [(ngModel)]="mesto"></td>
+                </tr>
+                <tr>
+                    <td>Datum odrzavanja radionice: </td>
+                    <td colspan="2"><input type="datetime-local"  [(ngModel)]="datum"></td>
+                </tr>
+                <tr>
+                    <td>Kratak opis radionice: </td>
+                    <td colspan="2"><input  [(ngModel)]="opis"></td>
+                </tr>
+                <tr>
+                    <td>Duzi opis: </td>
+                    <td colspan="2">
+                        <textarea  [(ngModel)]="duziOpis"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Broj mesta: </td>
+                    <td colspan="2">
+                        <input  type="number" [(ngModel)]="slobodnaMesta">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Slika:</td>
+                    <td><input type="file" [(ngModel)]="slika" (change)="ucitajSliku($event)"></td>
+                    <td><button (click)="obrisiSliku()">Obrisi sliku</button></td>
+                </tr>
+                <tr>
+                    <td>Galerija:</td>
+                    <td><input type="file" [(ngModel)]="galerija" (change)="ucitajGaleriju($event)" multiple></td>
+                    <td><button (click)="obrisiGaleriju()">Obrisi slike</button></td>
+                </tr>
+                <tr >
+                    <td colspan="3" style="text-align: center;"><button (click)="potvrdi()">Potvrdi</button></td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="color: red;text-align: center;">{{poruka}}</td>
+                </tr>
+                <tr *ngFor="let g of galerija">
+                   <td colspan="3" align="center"> <img  [src]="g" height="400px" width="500px"></td>
+                </tr>
+            </table>
+           </div>
+        </div>
+    </div>
+    <footer class="bg-dark text-white p-4" style="padding-top: 20px;">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <p class="text-center" >Elektrotehnicki fakultet, Univerzitet u Beogradu 2023.</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+</body>
+</html>

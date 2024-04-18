@@ -1,0 +1,12 @@
+tr:nth-child(odd) {
+    background-color: #f2f2f2;
+  }
+
+  table, .error{
+    font-size: 20px;
+  }
+.error, .bezBoje{
+  background-color: white;
+}
+
+

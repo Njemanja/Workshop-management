@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 20px;">
+          <div class="container">
+            <div class="row">
+                <div class="col-lg-12" style="max-height: 150px;overflow-y: auto;text-align: center;color: white;">
+                    <table width="100%">
+                        <tr>
+                            <td style="color: white; font-weight: bolder; font-size: 40px">Caskanje</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="user1">Nazad</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="">Logout</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+    </header>
+    <div class="container">
+        
+        <div class="row">
+            <div class="col-lg-12" style="max-height: 150px;overflow-y: auto;text-align: center;background-color: rgb(180, 143, 143);">
+                <table width="100%">
+                    <tr *ngFor="let p of poruke, let i=index">
+                        <td><button (click)="otvori(i)" id="{{i}}">{{p.korisnickoIme1}}</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-5 " id="zatvori_{{i}}"  *ngFor="let p of poruke; let i = index " style="display: none ;align-content: center;border: solid black; float: left; overflow:auto; height: 250px; margin: 20px; position: relative;">
+                <div style="text-align: center; background-color: gray; color: white;
+                font-size: large; ">
+                
+                {{p.korisnickoIme1}}
+                <a style="float: right; margin-right: 5px; color: black; font-weight: bolder;" (click)="zatvori(i)">X</a>
+               
+            </div>
+                <table *ngFor="let p1 of p.poruke " [ngClass]=" (p1.from == p.korisnickoIme1) ? 'right' : 'left'" >
+                    
+                    <tr>
+                        <td>
+                            <table >
+                                <tr>
+                                    <td *ngIf=" p1.from == p.korisnickoIme2" ><img [src]="p.slika2" height="45px" width="45px" style=" border-radius: 50%;"></td>
+                                    <td>
+                                        <table>
+                                            <tr><td> <div *ngIf=" p1.from == p.korisnickoIme2"><b>Ja</b>,   {{p1.datum | date:"dd.MM.yyyy. HH:mm"}}</div>
+                                                <div *ngIf=" p1.from == p.korisnickoIme1"><b>{{p.korisnickoIme1}}</b>,  {{p1.datum | date:"dd.MM.yyyy. HH:mm"}}</div>
+                                            </td></tr>
+                                            <tr style="word-break: break-word; ">
+                                                <td class="jednaPoruka">{{p1.poruka}}</td>
+                                            
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td *ngIf=" p1.from == p.korisnickoIme1"><img [src]="p.slika1" height="45px" width="45px" style=" border-radius: 50%;"></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <table  style="margin-left:0;margin-right:0; border-top: solid black; overflow: hidden; " width="100%" >
+                    <tr >
+                            <td>Poruka:
+                                <input [(ngModel)]="dataNew[i]" name="key_{{i}}" type="text">
+                            </td>
+                            <td align="right"><button (click)="posaljiPoruku(p.idRad, i, p.korisnickoIme1)">Posalji</button></td>
+                        </tr>
+                </table>
+           </div>
+        </div>
+    </div>
+    
+    <br>
+    <!--<div class="svePoruke" style=" justify-content: start;">
+        <table *ngFor="let p of poruke; let i = index " style="display: none;" class="poruke skrol" cellspacing="0" id="zatvori_{{i}}">
+            <tr style="float: center; "><td><button (click)="zatvori(i)">X</button></td></tr>
+            <tr >
+                 <td class="skrol"> <table *ngFor="let p1 of p.poruke " [ngClass]=" (p1.from == p.korisnickoIme1) ? 'left' : 'right'">
+                     <tr>
+                         <td>
+                             <table >
+                                 <tr>
+                                     <td *ngIf=" p1.from == p.korisnickoIme1" ><img [src]="p.slika1" style="border-radius: 50%; width: 45px;height: 45px;"></td>
+                                     <td>
+                                         <table>
+                                             <tr><td> <div *ngIf=" p1.from == p.korisnickoIme1">Ja,   {{p1.datum | date:"dd.MM.yyyy. HH:mm"}}</div>
+                                                 <div *ngIf=" p1.from == p.korisnickoIme2">{{p.korisnickoIme2}},  {{p1.datum | date:"dd.MM.yyyy. HH:mm"}}</div>
+                                               </td></tr>
+                                             <tr style="word-break: break-word">
+                                                 <td class="jednaPoruka">{{p1.poruka}}</td>
+                                             
+                                             </tr>
+                                         </table>
+                                     </td>
+                                     <td *ngIf=" p1.from == p.korisnickoIme2"><img [src]="p.slika2" style="border-radius: 50%; width: 45px;height: 45px;"></td>
+                                 </tr>
+                             </table>
+                         </td>
+                     </tr>
+                 </table></td>
+            </tr>
+         <tr style="width: 100%;outline: 3px solid;">
+            <td style="width: 100%;"> <table style="margin-left:0;margin-right:0; width: 100%">
+             <tr>
+                 <td>Poruka:
+                    <input [(ngModel)]="dataNew[i]" name="key_{{i}}" type="text">
+                 </td>
+                 <td align="right"><button (click)="posaljiPoruku(p.idRad, i, p.korisnickoIme1)">Posalji</button></td>
+             </tr>
+         </table></td></tr>
+         </table>
+         
+
+    </div>-->
+    <footer class="bg-dark text-white p-4 fixed-bottom" style="padding-top: 20px;">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <p class="text-center" >Elektrotehnicki fakultet, Univerzitet u Beogradu 2023.</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+</body>
+</html>

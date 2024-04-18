@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Registracija korisnika</title>
+</head>
+<body style="text-align: center; width: 100%; height: 100%;" >
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 20px;">
+          <div class="container">
+            <div class="container" style="text-align: center;">
+                <p style="color: white; font-size: 30px;">Registracija korisnika</p>
+              </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="">Login</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+    </header>
+    <div class="container content">
+       
+        <div class="row">
+        
+                <div class="col-lg-12">
+                    <table align="center" style=" border-spacing:0 15px;margin-top: 10px; ">
+                        <tr>
+                            <td>Ime:   </td>
+                            <input type="text" name="ime" [(ngModel)]="ime" style="border-radius: 25px;">
+                        </tr>
+                        <tr>
+                            <td>Prezime: </td>
+                            <input type="text" name="prezime" [(ngModel)]="prezime" style="border-radius: 25px;">
+                        </tr>
+                        <tr>
+                            <td>Korisnicko ime:   </td>
+                            <input type="text" name="korisnickoIme" [(ngModel)]="korisnickoIme" style="border-radius: 25px;">
+                        </tr>
+                        <tr>
+                            <td>Lozinka: </td>
+                            <input type="text" name="lozinka" [(ngModel)]="lozinka" style="border-radius: 25px;"  type="password">
+                        </tr>
+                        <tr>
+                            <td>Lozinka (ponovo): </td>
+                            <input type="text" name="lozinka" [(ngModel)]="lozinka1" style="border-radius: 25px;"  type="password">
+                        </tr>
+                        <tr>
+                            <td>Kontakt telefon: </td>
+                            <input type="text" name="telefon" [(ngModel)]="telefon" style="border-radius: 25px;">
+                        </tr>
+                        <tr>
+                            <td>Email: </td>
+                            <input type="text" name="email" [(ngModel)]="email" style="border-radius: 25px;">
+                        </tr>
+                        <tr>
+                            <td><input type="file" [(ngModel)]="slika" (change)="ucitajSliku($event)"></td>
+                            <td><button (click)="obrisiSliku()">Obrisi sliku</button></td>
+                        </tr>
+                        <tr >
+                            <td colspan="2" align="center" class="bezBoje"><img [src]="slika" id="image"></td>
+                        </tr>
+                        <tr>
+                            <td style="color: red; white-space:pre;" class="error" colspan="2" align="center"> {{poruka}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="bezBoje">
+                                <button (click)="register()">Registracija</button>
+                            </td>
+                        </tr>
+                        
+                       
+                    </table>
+                </div>
+        </div>
+      
+    </div>
+    <header style="margin-top: 220px;">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+          <div class="container">
+            <div class="container" style="text-align: center;">
+                <p style="color: white;">Elektrotehnicki fakultet, Univerzitet u Beogradu 2023.</p>
+              </div>
+            
+          </div>
+        </nav>
+    </header>
+
+    
+</body>
+</html>

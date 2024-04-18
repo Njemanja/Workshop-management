@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <title>Radionice</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 20px;">
+          <div class="container">
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="user">Nazad</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="">Logout</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="row">
+        <div class="col-lg-12 col-sm-12">
+            <div class="active" style="background-color: black; color:white; text-align: center;"><h2>Prijavljene/Zavrsene</h2></div>
+            <table *ngFor="let p of celePrijave; let i = index " align="center" >
+                <tr [ngClass]="p.status? 'prihvacen': 'nijePrihvacen' ">
+                    <td>
+                        <table>
+                            <tr>
+                                <td colspan="2"><b>Naziv: </b>{{p.naziv}}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Mesto: </b>{{p.mesto}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Datum: </b>{{p.datum | date:"dd.MM.yyyy. HH:mm"}}
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    
+
+                    <td align="center" *ngIf="p.zavrsena">
+                        <button  (click)="dodajLajk(p.idRad)"  class="fa fa-thumbs-up"></button>
+                        <br>
+                        <br>
+                        <select> 
+                            <option value="" selected style="display:none" >Lajkovi</option>
+                            <option  *ngFor="let l of lajkovi" disabled>
+                                <div *ngIf="l.idRad==p.idRad; else empty"> 
+                                    {{l.korisnickoIme}}
+                                </div>
+                                <ng-template #empty >
+                                    
+                                </ng-template>
+                            </option>       
+                        </select>
+                    </td>
+                    <td>
+                        <button *ngIf="p.nemaVremena" (click)="obrisiPrijavu(p.idRad)">Obrisi prijavu</button>
+
+                    </td>
+                </tr>
+                <tr *ngIf="p.zavrsena && p.status">
+                    <td class='far'   >
+                    <div style="width: 20%;  background-color: red;  border-radius: 10px;">
+                        🤍<b>{{p.brojLajkova}}</b> &nbsp; <i class="fa fa-comment fa-1x" style="color: white;"></i><b>{{p.komentari.length}}</b>
+
+                    </div>
+                </td> 
+                </tr>
+                <tr *ngIf="p.zavrsena && p.status">
+                    <td colspan="4" class="komentari" width="200px">
+                         <div style="height: 300px;  overflow-y:scroll; ">
+                            <table  *ngFor="let k of p.komentari" cellpadding="20px" >
+                                <tr>
+                                    <td><img [src]="k.slika" width="45px" height="45px"  style=" border-radius: 50%;"></td>
+                                    <td>
+                                        <table>
+                                            <tr><td><b>{{k.korisnickoIme}}</b>,{{k.datum | date:"dd.MM.yyyy. HH:mm"}}</td></tr>
+                                            <tr ><td class="kom">{{k.tekst}}</td></tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                         </div>
+                        <table align="center">
+                            <tr>
+                                <td>Komentar: <input [(ngModel)]="dataNew[i]" name="key_{{i}}" type="text"></td>
+                                <td><button (click)="dodajKomentar(p.idRad,i)">Posalji</button></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Poruka za organizatora: <input [(ngModel)]="dataNew1[i]" name="key1_{{i}}" type="text"></td>
+                                <td><button (click)="posaljiPoruku(p.idRad,i)">Posalji</button></td>
+                   
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <hr/>
+                    </td>
+                </tr>
+                <!--komentari!-->
+            </table>
+            
+        </div>
+    <hr/>
+    <br>
+        </div>
+
+        <div class="row">
+            
+        <div class="col-lg-12 col-sm-12" style="align-items: center;">
+            <div class="active" style="background-color: black; color:white; text-align: center;"><h2>Radionice</h2></div>
+
+            <table idth="100%"  cellpadding="10" cellspacing="0" style="text-align: center;">
+                <tr>
+                    
+                    <th>Naziv</th>
+                    <th>Datum</th>
+                    <th>Mesto</th>
+                    <th>Opis</th>
+                    <th>Slika</th>
+                    
+                </tr>
+                <tr *ngFor="let r of sve" [ngClass]="{'': r.status == 1, 'klasa0': r.status == 0}" style="border: 2px solid black">
+                    
+                    <td>{{r.naziv}}</td>
+                    <td>{{r.datum | date:"dd.MM.yyyy. HH:mm"}}</td>
+                    <td>{{r.mesto}}</td>
+                    <td>{{r.opis}}</td>
+                    <td><img [src]="r.slika" width="100px"></td>
+                    
+                    <td><a [routerLink]="['/user/mojeRadionice/informacije', r.id]">Sve informacije o radionici</a></td>
+        
+                    <td><button  (click)="prijaviMe(r.id, r.datum)" *ngIf="r.slobodnaMesta > 0">Prijavi me</button>
+                        <button (click)="dodajZaObavestenje(r.id)" *ngIf="r.slobodnaMesta == 0">Obavesti me kad  se oslobodi mesto</button>
+                    </td>
+                    
+                </tr>
+            </table>
+            </div>
+        </div>
+
+    </div>
+    <footer class="bg-dark text-white p-4" style="padding-top: 20px;margin-top: 10px;">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <p class="text-center" >Elektrotehnicki fakultet, Univerzitet u Beogradu 2023.</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+    
+
+
+</body>
+</html>
+
